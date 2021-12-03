@@ -12,14 +12,11 @@ namespace Lect8V2
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
             DependencyService.Register<IAccountService, AccountService>();
-            //MainPage = new AppShell();
-            //MainPage = new DataValidationPage();
+            MainPage = new DataValidationPage();
             //MainPage = new DataValidationPage2();
             //MainPage = new CustomRenderDemoPage();
-            MainPage = new DependencyServiceDemoPage();
+            //MainPage = new DependencyServiceDemoPage();
         }
 
         protected override void OnStart()
