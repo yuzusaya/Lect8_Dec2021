@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="Lect8V2.Views.DataValidationPage2">
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Email">
+                <Entry.Behaviors>
+                    <xct:EmailValidationBehavior InvalidStyle="{StaticResource InvalidEntryStyle}" Flags="ValidateOnValueChanging,ValidateOnAttaching" x:Name="EmailValidator"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Button Text="Register" IsEnabled="False">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference EmailValidator},Path=IsValid}" Value="True">
+                        <Setter Property="IsEnabled" Value="True"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:converter="clr-namespace:Lect8V2.Converters"
+             xmlns:vm="clr-namespace:Lect8.ViewModels"
+             x:Class="Lect8V2.Views.DataValidationPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <vm:DataValidationViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Email" Text="{Binding UserName.Value,Mode=TwoWay}">
+                <Entry.Behaviors>
+                    <xct:EventToCommandBehavior EventName="TextChanged" Command="{Binding ValidateEmailCommand}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="{Binding UserName.Errors,Converter={StaticResource FirstValidationErrorConverter}}" TextColor="Red"/>
+            <Entry Placeholder="Password" Text="{Binding Password.Value,Mode=TwoWay}">
+                <Entry.Behaviors>
+                    <xct:EventToCommandBehavior EventName="TextChanged" Command="{Binding ValidatePasswordCommand}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="{Binding Password.Errors,Converter={StaticResource FirstValidationErrorConverter}}" TextColor="Red"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
